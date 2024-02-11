@@ -1,0 +1,111 @@
+---
+const links = [
+  {
+    ref: '01',
+    name: 'Home',
+    href: '/',
+  },
+  {
+    ref: '02',
+    name: 'About',
+    href: '/about',
+  },
+  {
+    ref: '03',
+    name: 'Pricing',
+    href: '/pricing',
+  },
+  {
+    ref: '04',
+    name: 'Contact',
+    href: '/contact',
+  },
+];
+---
+
+<header
+  x-data="{ open: false }"
+  class="sticky top-0 z-50 bg-white shadow-md transition dark:bg-primary-950"
+  :class="{ 'bg-primary-500/10 dark:bg-primary-400/10': open, 'bg-primary-50 dark:bg-primary-950': !(open) }"
+>
+  <div
+    class="mx-auto flex max-w-2xl items-center justify-between px-4 py-4 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8"
+  >
+    <!-- Brand logo -->
+    <div class="flex">
+      <a
+        href="/"
+        class="rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-950 dark:group-focus-visible:outline-primary-200"
+      >
+        <span class="sr-only">Stone</span>
+        <img
+          class="h-14 w-auto"
+          width="65"
+          height="40"
+          :src="$store.theme.isDark ? '/assets/logo_white.svg' : '/assets/logo_black.svg'"
+          alt="Stone"
+        />
+      </a>
+    </div>
+
+    <!-- Actions -->
+    <div class="-mr-2 flex items-center space-x-2 sm:space-x-3">
+      <!-- Toggle theme mode -->
+      <button
+        type="button"
+        class="inline-flex h-14 w-14 items-center justify-center rounded-full text-primary-950 ring-primary-950 transition hover:bg-primary-500/10 focus:outline-none focus-visible:ring-2 dark:text-primary-200 dark:hover:bg-primary-400/10"
+        x-data
+        @click="$store.theme.toggle()"
+      >
+        <span class="sr-only">Toggle theme mode</span>
+        <svg
+          x-cloak
+          class="h-6 w-6"
+          :class="{ 'hidden': !($store.theme.isDark) }"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <!-- SVG icons for dark mode -->
+        </svg>
+        <svg
+          x-cloak
+          class="h-6 w-6"
+          :class="{ 'hidden': $store.theme.isDark }"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <!-- SVG icons for light mode -->
+        </svg>
+      </button>
+
+      <!-- Toggle menu -->
+      <button
+        type="button"
+        class="inline-flex h-14 w-14 items-center justify-center rounded-full text-primary-950 ring-primary-950 transition hover:bg-primary-500/10 focus:outline-none focus-visible:ring-2 dark:text-primary-200 dark:hover:bg-primary-400/10"
+        @click="open = !open"
+        @mousedown="if (open) $event.preventDefault()"
+        aria-controls="website-menu"
+        aria-expanded="false"
+        :aria-expanded="open.toString()"
+      >
+        <!-- Toggle menu icon -->
+      </button>
+    </div>
+  </div>
+
+  <!-- Menu content -->
+  <div
+    class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+    id="website-menu"
+    x-cloak
+    x-show="open"
+    x-collapse
+    x-collapse.duration.500ms
+  >
+    <!-- Menu items -->
+  </div>
+</header>
